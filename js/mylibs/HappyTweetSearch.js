@@ -1,7 +1,7 @@
 var HappyTweetSearch = Class.extend({
   happyWords: [],
   city: '',
-  twitterBaseUri: 'http://search.twitter.com/search.json?q=',
+  twitterBaseUri: 'http://search.twitter.com/search.json?',
   
   init: function(happyWords) {
     this.setHappyWords(happyWords);
@@ -46,7 +46,13 @@ var HappyTweetSearch = Class.extend({
   
   doSearch: function(searchCallback) {
     this.generateSearchURI(function(uri) {
-      console.log(uri);
+      $.ajax({
+	url: uri, 
+	dataType: 'jsonp',
+	success: function(result) {
+	  console.log(result);
+	}
+      });
     });
   }
 });

@@ -17,9 +17,9 @@ var TweetHappiness = Class.extend({
       var city1Results = null;
       var city2Results = null;
       
-      this.getHappyTweetsForCity(city1, function(results) {
+      parentObject.getHappyTweetsForCity(city1, function(results) {
         city1Results = results;
-        this.getHappyTweetsForCity(city2, function(results) {
+        parentObject.getHappyTweetsForCity(city2, function(results) {
           city2Results = results;
           
           parentObject.computeHappiestCity(city1Results, city2Results);
@@ -31,8 +31,8 @@ var TweetHappiness = Class.extend({
   },
   
   getHappyTweetsForCity: function(city) {
-    happinessSearch.setCity(city);
-    happinessSearch.doSearch(function(response) {
+    this.happinessSearch.setCity(city);
+    this.happinessSearch.doSearch(function(response) {
       console.log(response);
     });
   }
