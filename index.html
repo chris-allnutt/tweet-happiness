@@ -1,0 +1,30 @@
+<html>
+  <head>
+    <title>Tweet Happiness</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js"></script>
+    <script type="text/javascript" src="js/libs/Class.js"></script>
+    <script type="text/javascript" src="js/config/HappyWords.js"></script>
+    <script type="text/javascript" src="js/mylibs/HappyTweetSearch.js"></script>
+  </head>
+  <body>
+    <div class="validation-messages"></div>
+    <form class="happiness-comparison-form">
+      <label for="city1">City 1</label>
+      <input id="city1" type="text"/>
+      <label for="city2">City 1</label>
+      <input id="city2" type="text"/>
+      
+      <input type="submit" value="Compare Happiness"/>
+    </form>
+    
+    <div class="happiest-city-result" style="display: none">
+      <strong>The Happiest City is:</strong><span class="city-name">
+    </div>
+    
+    <script type="text/javascript">
+    $(function() {
+      var happyTweetSearch = new HappyTweetSearch(HappyWords);
+    });
+    </script>
+  </body>
+</html>
