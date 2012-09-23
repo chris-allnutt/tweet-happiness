@@ -1,11 +1,61 @@
 describe("HappyTweetSearch", function() {
+  var happyTweetSearch;
   // var player;
   // var song;
   // 
-  // beforeEach(function() {
-  //   player = new Player();
-  //   song = new Song();
-  // });
+  beforeEach(function() {
+    happyTweetSearch = new HappyTweetSearch(HappyWords);
+  });
+  
+  describe("when generating search query", function() {
+      
+    beforeEach(function() {
+      happyTweetSearch.setCity('Christiansburg, VA');
+    });
+      
+    it("should add provided words to search query", function() {
+      var searchQuery = ''
+      
+      runs(function() {
+        happyTweetSearch.generateSearchURI(function(uriWithWords) {
+          searchQuery = uriWithWords;
+        });        
+      });
+      
+      // this is a depenency on the google API :(
+      waitsFor(function() {
+        return searchQuery !== '';
+      });
+      
+      runs(function() {  
+        for(var x = 0; x < HappyWords.length; x++) {
+          console.log(searchQuery);
+          expect(searchQuery.indexOf(HappyWords[x]) !== -1).toBe(true);
+        }
+      });
+    });
+  
+    it("should add geocoded location to search query", function() {
+      var geocodedURI = '';
+      
+      runs(function() {
+        happyTweetSearch.generateSearchURI(function(uriWithCode) {
+          geocodedURI = uriWithCode;
+        });        
+      });
+
+      // this is a depenency on the google API :(
+      waitsFor(function() {
+        return geocodedURI !== '';
+      });
+        
+      runs(function() {        
+        // this test should be improved with a numeric regexp for the geocoding
+        expect(geocodedURI.indexOf('geocode') !== -1).toBe(true);        
+      })
+    });
+  
+  })
   // 
   // it("should be able to play a Song", function() {
   //   player.play(song);
